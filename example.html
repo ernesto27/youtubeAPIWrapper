@@ -13,16 +13,30 @@
 	<script type="text/javascript">
 		YoutubeAPI.create({
 			items: [
-				{ elementId: 'player1', videoId: 'tl77WXVQ8EU'},
-				{ elementId: 'player2', videoId: 'K0gryiltJo0'}
+				{ 
+					elementId: 'player1', 
+				  	videoId: 'tl77WXVQ8EU',
+					width: 400,
+					height: 300,
+					playerVars: { 'autoplay': 1, 'controls': 1, 'showinfo': 0, 'rel': 0 }
+				},
+				{ 
+					elementId: 'player2', 
+					videoId: 'K0gryiltJo0',
+					width: 200,
+					height: 200,
+					playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 }
+				}
 
 			],
-			params: {
-				autoplay: 1
+
+			onReady: function(){
+				console.log(YT);
 			}
+			
 		});
 
-		// YoutubeAPI.get('player1').pause();
+
 
 	</script>
 

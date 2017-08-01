@@ -1,11 +1,20 @@
 var YoutubeAPI = {
 
+	params: [],
 	items: [],
 	players:[], 
+
+	defaultSettings: {
+		height: 200,
+		width: 200,
+		playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
+	},
+
 
 	create: function(params){
 		this.addLibrary();
 
+		this.params = params;
 		this.items = params.items;
 
 		this.initPlayer();
@@ -24,20 +33,34 @@ var YoutubeAPI = {
 		window.onYouTubeIframeAPIReady = function(){
 			for( var index in that.items){
 				var current = that.items[index];
-				console.log(current)
+				var settings = that.merge(that.defaultSettings, current);
 				var player;						
-				player = new YT.Player(current.elementId , {
-					height: '360',
-    				width: '640',
-					videoId: current.videoId,
-					playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
-				});
+				player = new YT.Player(current.elementId , settings);
+				that.players[current.elementId] = player;
 			}
+
+			that.params.onReady();
+
 		}
 	},
 
 
-	get: function(element){
+	merge: function(defaultSettings, newSettings){
+		for(var key in newSettings){
+			if (newSettings.hasOwnProperty(key)){
+				defaultSettings[key] = newSettings[key];
+				if(key == 'playerVars'){
+					for( var index in newSettings[key]){
+						defaultSettings[key][index] = newSettings[key][index];
+					}
+				}
+			}
+		}
+		return defaultSettings;
+	},
 
+
+	get: function(element){
+		return this.players[element];
 	}
 }
