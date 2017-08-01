@@ -33,14 +33,16 @@ var YoutubeAPI = {
 		window.onYouTubeIframeAPIReady = function(){
 			for( var index in that.items){
 				var current = that.items[index];
-				var settings = that.merge(that.defaultSettings, current);
-				var player;						
-				player = new YT.Player(current.elementId , settings);
+				var settings = that.merge(that.defaultSettings, current);		
+				settings.events = {
+					'onStateChange': that.onPlayerStateChange
+				}
+
+				var player = new YT.Player(current.elementId , settings);
 				that.players[current.elementId] = player;
 			}
 
 			that.params.onReady();
-
 		}
 	},
 
@@ -57,6 +59,19 @@ var YoutubeAPI = {
 			}
 		}
 		return defaultSettings;
+	},
+
+	onPlayerStateChange: function(event){
+		for(var index in YoutubeAPI.items){
+			var current = YoutubeAPI.items[index];
+			// console.log(current)
+			for(var key in current){
+				if(key == 'onPlaying'){
+					current.onPlaying();
+				}
+			}
+		}
+
 	},
 
 
