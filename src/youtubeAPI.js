@@ -1,6 +1,7 @@
 var YoutubeAPI = {
 
 	items: [],
+	players:[], 
 
 	create: function(params){
 		this.addLibrary();
@@ -26,12 +27,17 @@ var YoutubeAPI = {
 				console.log(current)
 				var player;						
 				player = new YT.Player(current.elementId , {
+					height: '360',
+    				width: '640',
 					videoId: current.videoId,
 					playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
 				});
 			}
-
-			
 		}
+	},
+
+
+	get: function(element){
+
 	}
 }
