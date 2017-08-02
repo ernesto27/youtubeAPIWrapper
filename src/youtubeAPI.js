@@ -85,6 +85,16 @@ var YoutubeAPI = {
 		}
 	},
 
+
+	/**
+	 * Paused all videos loaded
+	 */
+	pauseAllVideos: function(){
+		for(var key in this.players){
+			this.players[key].pauseVideo();
+		}
+	},
+
 	/**
 	 * Obtain the instance of a player video
 	 * @param {string} element

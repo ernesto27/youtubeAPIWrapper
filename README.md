@@ -54,6 +54,11 @@ var player = YoutubeAPI.get('player1');
 player.playVideo();
 ```
 
+### Pause all videos
+```javascript
+YoutubeAPI.pauseAllVideos();
+```
+
 
 
 ## Full example

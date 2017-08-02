@@ -9,10 +9,13 @@
 	<div id="player1"></div>
 	<div id="player2"></div>
 
+
 	<br />
 	<div>
 		<button id="play-video-1">Play video 1</button>
 		<button id="pause-video-1">Pause video 1</button>
+		<button id="pause-all-videos">Pause all videos</button>
+
 	</div>
 
 	<script src='src/youtubeAPI.js'></script>
@@ -75,6 +78,10 @@
 		document.getElementById('pause-video-1').addEventListener('click', function(){
 			var player = YoutubeAPI.get('player1');
 			player.pauseVideo();
+		});
+
+		document.getElementById('pause-all-videos').addEventListener('click', function(){
+			YoutubeAPI.pauseAllVideos();
 		});
 
 
