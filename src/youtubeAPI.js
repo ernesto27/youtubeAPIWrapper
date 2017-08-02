@@ -58,8 +58,8 @@ var YoutubeAPI = {
 				if(key == 'elementId' && items[index][key] == currentId){
 
 					if (event.data == YT.PlayerState.PLAYING){
-						if(!items[index].isAlreadyPlayed && items[index].onFirstTimePlay){
-							items[index].onFirstTimePlay();
+						if(!items[index].isAlreadyPlayed && items[index].onFirstTimePlayed){
+							items[index].onFirstTimePlayed();
 							items[index].isAlreadyPlayed = true;
 						}
 

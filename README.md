@@ -12,7 +12,7 @@ Include the js file
 ```
 
 ### Usage
-Initialize with an array of objects , using the same params as the youtube api 
+Initialize with an array of objects , using the same params as the youtube api
 
 ```javascript
   YoutubeAPI.create({
@@ -28,8 +28,8 @@ Initialize with an array of objects , using the same params as the youtube api
 
 ### Events
 
-#### onFirstTimePlay
-Fired once , when the video is played for the first time 
+#### onFirstTimePlayed
+Fired once , when the video is played for the first time
 
 ### onPlaying
 Fired when the video is playing
@@ -63,7 +63,7 @@ YoutubeAPI.create({
       width: 400,
       height: 300,
       playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
-      onFirstTimePlay: function(){
+      onFirstTimePlayed: function(){
         console.log(' on first play video 1');
       },
       onPlaying: function(){
@@ -82,7 +82,7 @@ YoutubeAPI.create({
       elementId: 'player2',
       videoId: 'K0gryiltJo0',
       playerVars: { 'autoplay': 1, 'controls': 1, 'showinfo': 0, 'rel': 0 },
-      onFirstTimePlay: function(){
+      onFirstTimePlayed: function(){
         console.log(' on first play video 2');
       },
       onPlaying: function(){
@@ -101,16 +101,3 @@ YoutubeAPI.create({
   }
 });
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
