@@ -44,7 +44,13 @@ var YoutubeAPI = {
 		for( var index in items){
 			for(var key in items[index]){
 				if(key == 'elementId' && items[index][key] == currentId){
+
 					if (event.data == YT.PlayerState.PLAYING){
+						if(!items[index].isAlreadyPlayed && items[index].onFirstTimePlay){
+							items[index].onFirstTimePlay();
+							items[index].isAlreadyPlayed = true;
+						}
+
 						if(items[index].onPlaying){
 							items[index].onPlaying();
 						}
@@ -66,7 +72,6 @@ var YoutubeAPI = {
 			}
 		}
 	},
-
 
 	get: function(element){
 		return this.players[element];
