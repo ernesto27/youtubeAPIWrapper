@@ -32,7 +32,7 @@ Initialize with an array of objects , using the same params as the youtube api
 
 ### Events
 
-#### onFirstTimePlayed
+### onFirstTimePlayed
 Fired once , when the video is played for the first time
 
 ### onPlaying
