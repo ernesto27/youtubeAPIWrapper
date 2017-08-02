@@ -2,6 +2,10 @@
 
 A simple wrapper for the youtube api   https://developers.google.com/youtube/iframe_api_reference?hl=es-419
 
+## DEMO
+https://ernesto27.github.io/youtubeAPIWrapper/example.html
+
+
 ### Instalation
 Include the js file
 
