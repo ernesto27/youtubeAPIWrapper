@@ -4,6 +4,10 @@ var YoutubeAPI = {
 	items: [],
 	players:[],
 
+	/**
+	 * Initialize all things
+	 * @param  {Array} params
+	 */
 	create: function(params){
 		this.params = params;
 		this.items = params.items;
@@ -11,7 +15,9 @@ var YoutubeAPI = {
 		this.initPlayer();
 	},
 
-
+	/**
+	 * Create and script tag and load the youtube api library
+	 */
 	addLibrary: function(){
 		var tag = document.createElement('script');
 		tag.src = "https://www.youtube.com/iframe_api";
@@ -19,6 +25,9 @@ var YoutubeAPI = {
 		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 	},
 
+	/**
+	 * Create the video objects
+	 */
 	initPlayer: function(){
 		var that = this;
 		window.onYouTubeIframeAPIReady = function(){
@@ -36,7 +45,10 @@ var YoutubeAPI = {
 		}
 	},
 
-
+	/**
+	 * Event that fired when status of video change
+	 * @param {object} event
+	 */
 	onPlayerStateChange: function(event){
 		var currentId = event.target.a.id;
 		var items = YoutubeAPI.items;
@@ -73,6 +85,11 @@ var YoutubeAPI = {
 		}
 	},
 
+	/**
+	 * Obtain the instance of a player video
+	 * @param {string} element
+	 * @return {object}
+	 */
 	get: function(element){
 		return this.players[element];
 	}

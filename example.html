@@ -5,8 +5,15 @@
 </head>
 <body>
 
+	<h1>YoutubeAPI Wrapper DEMO</h1>
 	<div id="player1"></div>
 	<div id="player2"></div>
+
+	<br />
+	<div>
+		<button id="play-video-1">Play video 1</button>
+		<button id="pause-video-1">Pause video 1</button>
+	</div>
 
 	<script src='src/youtubeAPI.js'></script>
 
@@ -15,7 +22,7 @@
 			items: [
 				{
 					elementId: 'player1',
-				  	videoId: 'tl77WXVQ8EU',
+				  	videoId: 'cNTaFArEObU',
 					width: 400,
 					height: 300,
 					playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
@@ -23,11 +30,15 @@
 						console.log(' on first play video 1');
 					},
 					onPlaying: function(){
-						console.log('on playing event 1')
+						console.log('on playing video 1');
 					},
+					onPaused: function(){
+						console.log('on paused video 1');
+					},
+
 					onEnded: function(){
-						console.log('On ended video 1')
-					}
+						console.log('On ended video 1');
+					},
 				},
 				{
 					width: 400,
@@ -38,18 +49,33 @@
 					onFirstTimePlay: function(){
 						console.log(' on first play video 2');
 					},
+					onPlaying: function(){
+						console.log('on playing video 2');
+					},
 					onPaused: function(){
-						console.log('On pause video2 callback')
-					}
+						console.log('on paused video 2');
+					},
+
+					onEnded: function(){
+						console.log('On ended video 2');
+					},
 				}
 			],
 
 			onReady: function(){
-				//console.log(YT);
+				console.log('On load youtube api');
 			}
-
 		});
 
+		document.getElementById('play-video-1').addEventListener('click', function(){
+			var player = YoutubeAPI.get('player1');
+			player.playVideo();
+		});
+
+		document.getElementById('pause-video-1').addEventListener('click', function(){
+			var player = YoutubeAPI.get('player1');
+			player.pauseVideo();
+		});
 
 
 	</script>
