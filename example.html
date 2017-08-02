@@ -13,33 +13,38 @@
 	<script type="text/javascript">
 		YoutubeAPI.create({
 			items: [
-				{ 
-					elementId: 'player1', 
+				{
+					elementId: 'player1',
 				  	videoId: 'tl77WXVQ8EU',
 					width: 400,
 					height: 300,
 					playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
+					onFirstTimePlay: function(){
+
+					},
 					onPlaying: function(){
-						console.log('on playing1')
+						console.log('on playing event 1')
+					},
+					onEnded: function(){
+						console.log('On ended video 1')
 					}
 				},
-				{ 
-					elementId: 'player2', 
+				{
+					width: 400,
+					height: 300,
+					elementId: 'player2',
 					videoId: 'K0gryiltJo0',
-					width: 200,
-					height: 200,
 					playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
-					onPlaying: function(){
-						console.log('on playing2')
+					onPaused: function(){
+						console.log('On pause video2 callback')
 					}
 				}
-
 			],
 
 			onReady: function(){
 				//console.log(YT);
 			}
-			
+
 		});
 
 

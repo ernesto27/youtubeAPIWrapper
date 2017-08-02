@@ -2,21 +2,12 @@ var YoutubeAPI = {
 
 	params: [],
 	items: [],
-	players:[], 
-
-	defaultSettings: {
-		height: 200,
-		width: 200,
-		playerVars: { 'autoplay': 0, 'controls': 1, 'showinfo': 0, 'rel': 0 },
-	},
-
+	players:[],
 
 	create: function(params){
-		this.addLibrary();
-
 		this.params = params;
 		this.items = params.items;
-
+		this.addLibrary();
 		this.initPlayer();
 	},
 
@@ -33,7 +24,7 @@ var YoutubeAPI = {
 		window.onYouTubeIframeAPIReady = function(){
 			for( var index in that.items){
 				var current = that.items[index];
-				var settings = that.merge(that.defaultSettings, current);		
+				var settings = current;
 				settings.events = {
 					'onStateChange': that.onPlayerStateChange
 				}
@@ -41,37 +32,39 @@ var YoutubeAPI = {
 				var player = new YT.Player(current.elementId , settings);
 				that.players[current.elementId] = player;
 			}
-
 			that.params.onReady();
 		}
 	},
 
 
-	merge: function(defaultSettings, newSettings){
-		for(var key in newSettings){
-			if (newSettings.hasOwnProperty(key)){
-				defaultSettings[key] = newSettings[key];
-				if(key == 'playerVars'){
-					for( var index in newSettings[key]){
-						defaultSettings[key][index] = newSettings[key][index];
-					}
-				}
-			}
-		}
-		return defaultSettings;
-	},
-
 	onPlayerStateChange: function(event){
-		for(var index in YoutubeAPI.items){
-			var current = YoutubeAPI.items[index];
-			// console.log(current)
-			for(var key in current){
-				if(key == 'onPlaying'){
-					current.onPlaying();
+		var currentId = event.target.a.id;
+		var items = YoutubeAPI.items;
+
+		for( var index in items){
+			for(var key in items[index]){
+				if(key == 'elementId' && items[index][key] == currentId){
+					if (event.data == YT.PlayerState.PLAYING){
+						if(items[index].onPlaying){
+							items[index].onPlaying();
+						}
+					}
+
+					if(event.data == YT.PlayerState.PAUSED){
+						if(items[index].onPaused){
+							items[index].onPaused();
+						}
+					}
+
+					if(event.data == YT.PlayerState.ENDED){
+						if(items[index].onEnded){
+							items[index].onEnded();
+						}
+					}
+					break;
 				}
 			}
 		}
-
 	},
 
 
